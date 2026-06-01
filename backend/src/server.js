@@ -215,7 +215,21 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ message: 'Erro interno do servidor.' });
 });
 
-await initDatabase();
+async function initDatabaseWithRetry() {
+  const attempts = 12;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      await initDatabase();
+      return;
+    } catch (error) {
+      if (attempt === attempts) throw error;
+      console.warn(`Banco ainda indisponivel. Nova tentativa ${attempt + 1}/${attempts} em 5 segundos.`);
+      await new Promise((resolve) => setTimeout(resolve, 5000));
+    }
+  }
+}
+
+await initDatabaseWithRetry();
 
 app.listen(port, '0.0.0.0', () => {
   console.log(`API rodando em http://localhost:${port}`);
