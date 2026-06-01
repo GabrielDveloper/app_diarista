@@ -22,12 +22,8 @@ services:
   - type: web
     runtime: static
     name: sara-lima-agenda
-    rootDir: frontend
-    buildCommand: bash ./render-build.sh
+    buildCommand: echo "Using prebuilt Flutter Web"
     staticPublishPath: ./frontend/build/web
-    envVars:
-      - key: API_URL
-        value: https://sara-lima-api.onrender.com/api/v1
 
 databases:
   - name: sara-lima-db

@@ -1,0 +1,12 @@
+{
+  "name": "Gestao Domestica",
+  "short_name": "Agenda",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff8f1",
+  "theme_color": "#0d7c66",
+  "description": "Agenda publica e controle financeiro para profissional domestica.",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "icons": []
+}

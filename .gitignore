@@ -3,6 +3,11 @@ node_modules/
 .dart_tool/
 .dart-tool/
 build/
+!frontend/build/
+frontend/build/*
+!frontend/build/web/
+!frontend/build/web/**
+frontend/build/web/.last_build_id
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
