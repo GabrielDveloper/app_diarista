@@ -1,0 +1,37 @@
+services:
+  - type: web
+    runtime: node
+    name: sara-lima-api
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sara-lima-db
+          property: connectionString
+      - key: PUBLIC_SLUG
+        value: sara-lima
+      - key: PROFESSIONAL_NAME
+        value: Sara Lima
+      - key: PROFESSIONAL_SERVICE
+        value: Empregada domestica e diarista
+
+  - type: web
+    runtime: static
+    name: sara-lima-agenda
+    rootDir: frontend
+    buildCommand: bash ./render-build.sh
+    staticPublishPath: ./frontend/build/web
+    envVars:
+      - key: API_URL
+        value: https://sara-lima-api.onrender.com/api/v1
+
+databases:
+  - name: sara-lima-db
+    databaseName: gestao_domestica
+    user: gestao
+    plan: free
+    ipAllowList: []
